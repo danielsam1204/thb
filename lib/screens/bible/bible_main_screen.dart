@@ -174,10 +174,12 @@ class _BiblePageState extends State<BiblePage> {
   }
 
   Future<void> _loadBooks() async {
+
     final data = await BibleRepository.loadBible();
     setState(() {
       booksMap = data;
     });
+
   }
 
   @override

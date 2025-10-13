@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thb/common/app_color.dart';
+import 'package:thb/screens/user/sigin.dart';
 
 import 'bible/bible_main_screen.dart';
 
@@ -173,7 +174,8 @@ class _LandingPageState extends State<LandingPage> {
                       GestureDetector(
                         onTap: () async {
                           if (_currentPage == pages.length - 1) {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>BiblePage()));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>BiblePage()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
                             prefs.setBool("landing", true);

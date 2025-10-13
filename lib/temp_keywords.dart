@@ -1,0 +1,17 @@
+String registerlogin = "பதிவு செய்யவும்";
+String wellsomeapp = "மீண்டும் ஆப்புக்கு வரவேற்கிறோம்";
+String signup = "உள்நுழைவு";
+String googlelogin = "கூகுளுடன் தொடரவும்";
+String applelogin = "ஆப்பிளுடன் தொடரவும்";
+String emaillogin = "மின்னஞ்சல் தொடரவும்";
+String alredyaccount = "ஏற்கனவே கணக்கு இருக்கிறதா?";
+String orbelowlogin = "அல்லது இதன்மூலம் உள்நுழையுங்கள்";
+String newaccountcreate = "புதிய கணக்கை உருவாக்குங்கள்";
+String creataccountdetailstitle = "உங்கள் கணக்கை உருவாக்க பதிவு செய்க";
+String emaillogintitle = "மின்னஞ்சல் மூலம் உள்நுழைவு";
+String name = "பெயர்";
+String emailid = "மின்னஞ்சல் ஐடி";
+String phonenumber = "கைபேசி எண் (விருப்பத்துக்கு ஏற்ப)";
+String password = "கடவுச்சொல்";
+String confirmpassword = "கடவுச்சொல்லை உறுதிப்படுத்துங்கள்";
+String logingo = "உள்நுழையவும்";
