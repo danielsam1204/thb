@@ -30,16 +30,12 @@ class _LoginState extends State<Login> {
     return Scaffold(
       backgroundColor: Color(0xFF441606),
       body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child:
-            // loginHome(),
-            // signUp(),
-            RegisterPageInput(),
-          ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child:
+          // loginHome(),
+          // signUp(),
+          RegisterPageInput(),
         ),
       ),
     );

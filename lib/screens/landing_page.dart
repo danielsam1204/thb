@@ -1,11 +1,9 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/screens/user/sigin.dart';
-
-import 'bible/bible_main_screen.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -38,18 +36,18 @@ class _LandingPageState extends State<LandingPage> {
 
   final List<Map<String, String>> pages = [
     {
-      "title": "title1".tr(),
-      "desc": "desc1".tr(),
+      "title": "bible_learnings".tr,
+      "desc": "lessons_from_the_scriptures_for_daily_living".tr,
       "image": "assets/image/landing_page/bible.png",
     },
     {
-      "title": "title2".tr(),
-      "desc": "desc2".tr(),
+      "title": "prayers_and_devotions".tr,
+      "desc": "daily_prayers_and_spiritual_guidance".tr,
       "image": "assets/image/landing_page/prayer.png",
     },
     {
-      "title": "title3".tr(),
-      "desc": "desc3".tr(),
+      "title": "church_and_fellowship".tr,
+      "desc": "strengthen_your_faith_with_fellowship".tr,
       "image": "assets/image/landing_page/church.png",
     },
   ];

@@ -57,22 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  easy_localization:
-    dependency: "direct main"
-    description:
-      name: easy_localization
-      sha256: "2ccdf9db8fe4d9c5a75c122e6275674508fd0f0d49c827354967b8afcc56bbed"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.8"
-  easy_logger:
-    dependency: transitive
-    description:
-      name: easy_logger
-      sha256: c764a6e024846f33405a2342caf91c62e357c24b02c04dbc712ef232bf30ffb7
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   fake_async:
     dependency: transitive
     description:
@@ -110,11 +94,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  flutter_localizations:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -133,6 +112,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      sha256: c79eeb4339f1f3deffd9ec912f8a923834bec55f7b49c9e882b8fef2c139d425
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.7.2"
   http:
     dependency: transitive
     description:
@@ -149,14 +136,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.20.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -213,14 +192,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.16.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -269,14 +240,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.1"
-  photo_view:
-    dependency: "direct main"
-    description:
-      name: photo_view
-      sha256: "1fc3d970a91295fbd1364296575f854c9863f225505c28c46e0a03e48960c75e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.0"
   platform:
     dependency: transitive
     description:
@@ -293,14 +256,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.5+1"
   shared_preferences:
     dependency: "direct main"
     description:

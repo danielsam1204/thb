@@ -1,18 +1,21 @@
-
 import 'package:flutter/material.dart';
+import 'package:thb/domain/helpers/theme/custom_themes/custom_app_bar_theme.dart';
+import 'package:thb/domain/helpers/theme/custom_themes/custom_time_picker_theme.dart';
 
-import '../../common/app_color.dart';
+import '../../../common/app_color.dart';
 
 class AppTheme {
   // 🌞 Light Theme
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.orange,
-    scaffoldBackgroundColor: AppColors.offWhite,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.orange,
-      foregroundColor: Colors.white,
-    ),
+    scaffoldBackgroundColor: AppColors.bgLightColor,
+    appBarTheme: CustomAppBarTheme.lightAppBarTheme,
+    timePickerTheme: CustomTimePickerTheme.lightTimerPickerTheme,
+    // const AppBarTheme(
+    //   backgroundColor: AppColors.orange,
+    //   foregroundColor: Colors.white,
+    // ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: Colors.black),
       bodyMedium: TextStyle(color: Colors.black87),
@@ -32,10 +35,13 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: AppColors.orangeLight,
     scaffoldBackgroundColor: AppColors.darkBg,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.darkBrown,
-      foregroundColor: Colors.white,
-    ),
+    appBarTheme: CustomAppBarTheme.darkAppBarTheme,
+    timePickerTheme: CustomTimePickerTheme.darkTimerPickerTheme,
+
+    // appBarTheme: const AppBarTheme(
+    //   backgroundColor: AppColors.darkBrown,
+    //   foregroundColor: Colors.white,
+    // ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: Colors.white),
       bodyMedium: TextStyle(color: Colors.white70),
