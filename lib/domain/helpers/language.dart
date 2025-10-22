@@ -44,6 +44,11 @@ class Language extends Translations {
       "prayers_and_devotions": "Prayers and Devotions",
       "church_and_fellowship": "Church and Fellowship",
       "strengthen_your_faith_with_fellowship": "Strengthen your faith with fellowship.",
+      "theme": "Theme",
+      "language": "Language",
+      "english": "English",
+      "tamil": "Tamil",
+      "dark_mode": "Dark Mode",
       "daily_prayers_and_spiritual_guidance":
           "Daily prayers and spiritual guidance.",
     },
@@ -88,6 +93,11 @@ class Language extends Translations {
       "prayers_and_devotions": "பிரார்த்தனைகள் மற்றும் பக்தி",
       "church_and_fellowship": "திருச்சபை மற்றும் உடன்பிறப்புகள்",
       "strengthen_your_faith_with_fellowship": "உங்கள் நம்பிக்கையை வலுப்படுத்தும் கற்றல்கள்.",
+      "theme": "தீம்",
+      "language": "மொழி",
+      "english" : "ஆங்கிலம்",
+      "tamil" : "தமிழ்",
+      "dark_mode" : "இரவு நிலை",
       "daily_prayers_and_spiritual_guidance":
           "தினசரி பிரார்த்தனைகள் மற்றும் ஆன்மீக வழிகாட்டல்கள்.",
     },

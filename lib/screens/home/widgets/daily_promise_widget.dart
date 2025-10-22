@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/common/app_icons.dart';
 import 'package:thb/widgets/custom_svg_icon.dart';
+import 'package:thb/widgets/custom_switch.dart';
 import 'package:thb/widgets/custom_text.dart';
 import 'package:thb/widgets/custom_title_tile.dart';
 import 'package:thb/controllers/home_controller.dart';
@@ -91,22 +92,13 @@ class DailyPromiseWidget extends StatelessWidget {
                   );
                 },
               ),
-
               GetBuilder<HomeController>(
                 builder: (controller) {
                   return Transform.scale(
                     scale: 0.6,
-                    child: Switch.adaptive(
-                      activeTrackColor: AppColors.primaryColor,
-                      inactiveThumbColor: AppColors.primaryColor,
-                      inactiveTrackColor: AppColors.bgLightColor,
-                      trackOutlineColor: MaterialStateProperty.resolveWith(
-                        (states) => AppColors.primaryColor,
-                      ),
+                    child: CustomSwitch(
                       value: controller.isToggle,
                       onChanged: controller.onChangeSwitch,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      padding: EdgeInsets.zero,
                     ),
                   );
                 },

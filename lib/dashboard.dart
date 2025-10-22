@@ -32,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
         if (lastPressed == null ||
             now.difference(lastPressed!) > const Duration(seconds: 2)) {
           lastPressed = now;
-          showCustomSnackBar("Press back again to exit" , isError: false);
+          showCustomSnackBar("Press back again to exit", isError: false);
           return;
         }
         SystemNavigator.pop();

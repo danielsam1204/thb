@@ -7,11 +7,36 @@ class SettingsController extends GetxController implements GetxService {
 
   SettingsController({required this.sharedPreferences});
 
-  Future<void> changeLanguage(Locale locale) async {
+  final RxBool _isDarkMode = false.obs;
+  final RxString _selectedLanguage = "Tamil".obs;
+
+  ThemeMode get theme => _isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
+
+  RxBool get isDarkMode => _isDarkMode;
+
+  RxString get selectedLanguage => _selectedLanguage;
+
+  Future<void> onChangeTheme(bool value) async {
+    _isDarkMode.value = value;
+    Get.changeThemeMode(theme);
+    await sharedPreferences.setBool("theme_mode", value);
+  }
+
+  Future<void> onChangeLanguage(String? value) async {
+    _selectedLanguage.value = value!;
+    Locale locale;
+    if (value == 'English') {
+      locale = Locale('en', 'US');
+    } else {
+      locale = Locale('ta', 'IN');
+    }
     Get.updateLocale(locale);
     String language = "${locale.languageCode}_${locale.countryCode}";
     await sharedPreferences.setString("language", language);
   }
 
-  // ta_IN
+  initCall() {
+    final languageCode = sharedPreferences.getString("language") ?? 'ta_IN';
+    _selectedLanguage.value = languageCode == 'ta_IN' ? "Tamil" : "English";
+  }
 }
