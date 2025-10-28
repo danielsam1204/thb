@@ -7,6 +7,7 @@ import 'package:thb/controllers/settings_controller.dart';
 import 'package:thb/dashboard.dart';
 import 'package:thb/domain/helpers/get_dep.dart' as dep;
 import 'package:thb/domain/helpers/language.dart';
+import 'package:thb/splash.dart';
 
 import 'domain/helpers/theme/app_theme.dart';
 
@@ -37,8 +38,8 @@ class MyApp extends StatelessWidget {
       locale: Locale(language),
       translations: Language(),
       fallbackLocale: Locale("ta_IN"),
-      home: Dashboard(),
-      // home: SplashScreen()
+      // home: Dashboard(),
+      home: SplashScreen()
     );
   }
 }
