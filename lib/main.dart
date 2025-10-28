@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
       locale: Locale(language),
       translations: Language(),
       fallbackLocale: Locale("ta_IN"),
-      home: Dashboard(),
-      // home: SplashScreen()
+      // home: Dashboard(),
+      home: ()
     );
   }
 }
