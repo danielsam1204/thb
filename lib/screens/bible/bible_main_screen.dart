@@ -1,150 +1,3 @@
-//
-// import 'package:flutter/material.dart';
-// import 'package:thb/common/app_color.dart';
-// import 'package:thb/domain/models/bible_json_model.dart';
-// import 'package:thb/domain/repository/json_bible/bible_repo.dart';
-//
-// class BiblePage extends StatefulWidget {
-//   const BiblePage({super.key});
-//
-//   @override
-//   State<BiblePage> createState() => _BiblePageState();
-// }
-//
-// class _BiblePageState extends State<BiblePage> {
-//   Map<String, BibleTamil> booksMap = {};
-//   int? _expandedIndex; // Track which book is expanded
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _loadBooks();
-//   }
-//
-//   Future<void> _loadBooks() async {
-//     final data = await BibleRepository.loadBible();
-//     setState(() {
-//       booksMap = data;
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     if (booksMap.isEmpty) {
-//       return  Scaffold(
-//         backgroundColor: Colors.white,
-//         body: Center(child: CircularProgressIndicator()),
-//       );
-//     }
-//
-//     final booksList = booksMap.values.toList();
-//
-//     return Scaffold( backgroundColor: Colors.white,
-//       appBar: AppBar(title: const Text("Bible Books")),
-//       body: Column(
-//         children: [
-//           Expanded(child: ListView.builder(
-//             itemCount: booksList.length,
-//             itemBuilder: (context, index) {
-//               final book = booksList[index];
-//               final isExpanded = _expandedIndex == index;
-//
-//               return AnimatedContainer(
-//                 duration: const Duration(milliseconds: 300),
-//                 curve: Curves.easeInOut,
-//                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-//                 child: Card(
-//                   child: Column(
-//                     children: [
-//                       ListTile(
-//
-//                         title: Text(
-//                           book.book?.tamil ?? "Unknown" +  "/" + "${book.book?.english ?? ""}  ",
-//                           style: const TextStyle(
-//                               fontSize: 18, fontWeight: FontWeight.bold),
-//                         ),
-//                         subtitle: Text(book.book?.english ?? ""),
-//                         trailing: Icon(
-//                           isExpanded
-//                               ? Icons.keyboard_arrow_up
-//                               : Icons.keyboard_arrow_down,
-//                         ),
-//                         onTap: () {
-//                           setState(() {
-//                             _expandedIndex = isExpanded ? null : index;
-//                           });
-//                         },
-//                       ),
-//                       // Expanded chapter list
-//                       ClipRect(
-//                         child: AnimatedAlign(
-//                           alignment: Alignment.topCenter,
-//                           duration: const Duration(milliseconds: 300),
-//                           heightFactor: isExpanded ? 1 : 0,
-//                           child: Column(
-//                             children: [
-//                               ClipRect(
-//                                 child: AnimatedAlign(
-//                                   alignment: Alignment.topCenter,
-//                                   duration: const Duration(milliseconds: 300),
-//                                   heightFactor: isExpanded ? 1 : 0,
-//                                   child: Padding(
-//                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-//                                     child: Wrap(
-//                                       spacing: 8, // horizontal spacing
-//                                       runSpacing: 8, // vertical spacing
-//                                       children: List.generate(book.chapters?.length ?? 0, (chapterIndex) {
-//                                         final chapter = book.chapters![chapterIndex];
-//                                         return GestureDetector(
-//                                           onTap: () {
-//                                             // Navigator.push(
-//                                             //   context,
-//                                             //   MaterialPageRoute(
-//                                             //     builder: (context) => VersesPage(
-//                                             //       chapter: chapter,
-//                                             //       book: book,
-//                                             //     ),
-//                                             //   ),
-//                                             // );
-//                                           },
-//                                           child: Container(
-//                                             width: 50, // fixed width
-//                                             height: 50, // fixed height
-//
-//                                             decoration: BoxDecoration(
-//                                               border: Border.all(color: AppColors.brown),
-//                                               color: Colors.transparent,
-//                                               borderRadius: BorderRadius.circular(8),
-//                                             ),
-//                                             alignment: Alignment.center, // center text inside
-//                                             child: Text(
-//                                               "${chapter.chapter}",
-//                                               style: const TextStyle(
-//                                                   fontWeight: FontWeight.bold, fontSize: 16),
-//                                             ),
-//                                           ),
-//                                         );
-//                                       }),
-//                                     ),
-//                                   ),
-//                                 ),
-//                               ),
-//
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//               );
-//             },
-//           ),)
-//         ],
-//       )
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/domain/models/bible_json_model.dart';
@@ -165,7 +18,8 @@ class _BiblePageState extends State<BiblePage> {
   String _selectedTab = "அனைத்தும்"; // default tab
   final ScrollController _scrollController = ScrollController();
 
-  final tabs = ["அனைத்தும்", "மழைய ஏற்றது", "புதிய ஏற்றது"];
+  final tabs = ["அனைத்தும்", "பழைய ஏற்பாடு ", "புதிய ஏற்பாடு "];
+  List<GlobalKey> _bookKeys = [];
 
   @override
   void initState() {
@@ -174,12 +28,11 @@ class _BiblePageState extends State<BiblePage> {
   }
 
   Future<void> _loadBooks() async {
-
     final data = await BibleRepository.loadBible();
     setState(() {
       booksMap = data;
+      _bookKeys = List.generate(booksMap.length, (_) => GlobalKey());
     });
-
   }
 
   @override
@@ -190,40 +43,33 @@ class _BiblePageState extends State<BiblePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (booksMap.isEmpty) {
-      return Scaffold(
-        backgroundColor: Colors.white,
-        body: const Center(child: CircularProgressIndicator()),
-      );
-    }
-
     final booksList = booksMap.values.toList();
 
     // Filter books based on selected tab safely
     List<BibleTamil> filteredBooks;
     if (_selectedTab == "மழைய ஏற்றது") {
-      filteredBooks = booksList.sublist(
-        0,
-        booksList.length >= 32 ? 32 : booksList.length,
-      );
+      filteredBooks = booksList.sublist(0, booksList.length >= 32 ? 32 : booksList.length);
     } else if (_selectedTab == "புதிய ஏற்றது") {
       filteredBooks = booksList.length > 32 ? booksList.sublist(32) : [];
     } else {
       filteredBooks = booksList;
     }
 
-    return Scaffold(
+    return booksMap.isEmpty
+        ? const Center(child: CircularProgressIndicator())
+        : Scaffold(
+
       backgroundColor: const Color(0xFFFFF8F0),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF9C4D00)),
-          onPressed: () {},
-        ),
+
         title: const Text(
           "பரிசுத்த பைபிள்",
-          style: TextStyle(color: Color(0xFF9C4D00), fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Color(0xFF9C4D00),
+            fontWeight: FontWeight.bold,
+          ),
         ),
         actions: const [
           Padding(
@@ -248,7 +94,6 @@ class _BiblePageState extends State<BiblePage> {
                       _expandedIndex = null;
                     });
 
-                    // Scroll to top when tab changes
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       _scrollController.animateTo(
                         0,
@@ -258,7 +103,7 @@ class _BiblePageState extends State<BiblePage> {
                     });
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: isSelected ? const Color(0xFF9C4D00) : Colors.white,
                       borderRadius: BorderRadius.circular(30),
@@ -277,144 +122,155 @@ class _BiblePageState extends State<BiblePage> {
             ),
           ),
           const SizedBox(height: 8),
-          // Books list with animation
+          // Books list
           Expanded(
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 400),
-              transitionBuilder: (child, animation) {
-                final offsetAnimation = Tween<Offset>(
-                    begin: const Offset(0, 0.1), end: Offset.zero)
-                    .animate(animation);
-                return SlideTransition(
-                  position: offsetAnimation,
-                  child: FadeTransition(opacity: animation, child: child),
+            child: ListView.builder(
+              controller: _scrollController,
+              itemCount: filteredBooks.length,
+              itemBuilder: (context, index) {
+                final book = filteredBooks[index];
+                final isExpanded = _expandedIndex == index;
+
+                return AnimatedContainer(
+                  key: _bookKeys[index],
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 3,
+                    child: Column(
+                      children: [
+                        // Book title
+                        ListTile(
+                          tileColor: AppColors.lableBackground,
+                          title: Text(
+                            book.book?.tamil ?? "Unknown",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF9C4D00),
+                            ),
+                          ),
+                          trailing: Icon(
+                            isExpanded
+                                ? Icons.keyboard_arrow_up
+                                : Icons.keyboard_arrow_down,
+                            color: const Color(0xFF9C4D00),
+                          ),
+                          onTap: () {
+                            setState(() {
+                              _expandedIndex = isExpanded ? null : index;
+                            });
+
+                            // Scroll after the frame is rendered
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              final context = _bookKeys[index].currentContext;
+                              if (context == null || !_scrollController.hasClients) return;
+
+                              final box = context.findRenderObject() as RenderBox?;
+                              if (box == null) return;
+
+                              final position = box.localToGlobal(Offset.zero).dy;
+                              final containerHeight = box.size.height;
+
+                              final screenHeight = MediaQuery.of(context).size.height;
+
+                              // Current scroll offset
+                              final currentOffset = _scrollController.offset;
+
+                              // Calculate bottom of container
+                              final bottom = position + containerHeight;
+
+                              double targetOffset = currentOffset;
+
+                              // If bottom is beyond screen height, scroll down to show full container
+                              if (bottom > screenHeight) {
+                                targetOffset += bottom - screenHeight + 16; // 16 for margin/padding
+                              }
+
+                              // If top is above, scroll up (optional)
+                              if (position < 0) {
+                                targetOffset += position - 16; // optional top padding
+                              }
+
+                              // Clamp offset
+                              targetOffset = targetOffset.clamp(
+                                _scrollController.position.minScrollExtent,
+                                _scrollController.position.maxScrollExtent,
+                              );
+
+                              _scrollController.animateTo(
+                                targetOffset,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            });
+                          },
+
+                        ),
+                        // Chapters grid
+                        ClipRect(
+                          child: Container(
+                            color: AppColors.lableBackground,
+                            child: AnimatedAlign(
+                              alignment: Alignment.topCenter,
+                              duration: const Duration(milliseconds: 300),
+                              heightFactor: isExpanded ? 1 : 0,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Wrap(
+                                  spacing: 8,
+                                  runSpacing: 8,
+                                  children: List.generate(
+                                    book.chapters?.length ?? 0,
+                                        (chapterIndex) {
+                                      final chapter = book.chapters![chapterIndex];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => VersesPage(
+                                                chapter: chapter,
+                                                book: book,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: const Color(0xFF9C4D00)),
+                                            color: Colors.transparent,
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            "${chapter.chapter}",
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                              color: Color(0xFF9C4D00),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
-              child: ListView.builder(
-                key: ValueKey(_selectedTab), // important for AnimatedSwitcher
-                controller: _scrollController,
-                itemCount: filteredBooks.length,
-                itemBuilder: (context, index) {
-                  final book = filteredBooks[index];
-                  final isExpanded = _expandedIndex == index;
-
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      elevation: 3,
-                      child: Column(
-                        children: [
-                          // Book title
-                          ListTile(
-                            tileColor: AppColors.lableBackground,
-                            title: Text(
-                              book.book?.tamil ?? "Unknown",
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF9C4D00),
-                              ),
-                            ),
-                            trailing: Icon(
-                              isExpanded
-                                  ? Icons.keyboard_arrow_up
-                                  : Icons.keyboard_arrow_down,
-                              color: const Color(0xFF9C4D00),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                _expandedIndex = isExpanded ? null : index;
-                              });
-
-                              // Auto scroll to make expanded book fully visible
-                              if (!isExpanded) {
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
-                                  final renderBox = context.findRenderObject() as RenderBox?;
-                                  if (renderBox != null) {
-                                    final position = renderBox.localToGlobal(Offset.zero);
-                                    final offset = _scrollController.offset + position.dy - 100;
-                                    _scrollController.animateTo(
-                                      offset,
-                                      duration: const Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  }
-                                });
-                              }
-                            },
-                          ),
-
-                          // Chapters grid
-                          ClipRect(
-
-                            child: Container(
-                              color: AppColors.lableBackground,
-                              child: AnimatedAlign(
-                                  alignment: Alignment.topCenter,
-                                  duration: const Duration(milliseconds: 300),
-                                  heightFactor: isExpanded ? 1 : 0,
-                                  child:
-                                    Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Wrap(
-                                        spacing: 8,
-                                        runSpacing: 8,
-                                        children: List.generate(
-                                          book.chapters?.length ?? 0,
-                                              (chapterIndex) {
-                                            final chapter = book.chapters![chapterIndex];
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) => VersesPage(
-                                                      chapter: chapter,
-                                                      book: book,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Container(
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: const Color(0xFF9C4D00)),
-                                                  color: Colors.transparent,
-                                                  borderRadius: BorderRadius.circular(8),
-
-                                                ),
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  "${chapter.chapter}",
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                    color: Color(0xFF9C4D00),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-
-                              ),
-                            )
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
             ),
           ),
         ],
