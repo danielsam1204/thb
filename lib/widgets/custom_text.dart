@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:thb/common/app_color.dart';
+import 'package:get/get.dart';
+import 'package:thb/controllers/settings_controller.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({
@@ -25,16 +26,21 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      maxLines: maxLines,
-      textAlign: textAlign,
-      overflow: overflow ?? TextOverflow.ellipsis,
-      style: TextStyle(
-        fontWeight: fontWeight ?? FontWeight.normal,
-        fontSize: fontSize,
-        color: color,
-      ),
-    );
+    final settingsController = Get.find<SettingsController>();
+    return Obx(() {
+      final scale = settingsController.getFontScale();
+      final fontScale = (fontSize ?? 14) * scale;
+      return Text(
+        text,
+        maxLines: maxLines,
+        textAlign: textAlign,
+        overflow: overflow ?? TextOverflow.ellipsis,
+        style: TextStyle(
+          fontWeight: fontWeight ?? FontWeight.normal,
+          fontSize: fontScale,
+          color: color,
+        ),
+      );
+    });
   }
 }

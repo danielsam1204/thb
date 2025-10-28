@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/common/app_icons.dart';
-import 'package:thb/screens/home/poster_screen.dart';
+import 'package:thb/screens/video/video_screen.dart';
+import 'package:thb/widgets/bubble_page_route.dart';
 import 'package:thb/widgets/custom_svg_icon.dart';
 import 'package:thb/widgets/custom_tab_bar.dart';
 import 'package:thb/widgets/custom_text.dart';
 import 'package:thb/widgets/custom_title_tile.dart';
+import 'package:thb/screens/home/widgets/posters_widget.dart';
 
-class PostersWidget extends StatelessWidget {
+class VideoWidget extends StatelessWidget {
   final bool fromHome;
 
-  const PostersWidget({super.key, this.fromHome = true});
+  const VideoWidget({super.key, this.fromHome = true});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         if (fromHome) ...{
-          CustomTitleTile(title: "posters".tr),
+          CustomTitleTile(title: "videos".tr),
           const SizedBox(height: 10),
         },
         SizedBox(
@@ -38,10 +40,17 @@ class PostersWidget extends StatelessWidget {
         ),
         if (fromHome)
           GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PosterScreen()),
-            ),
+            onTapDown: (details) {
+              final tapPosition = details.globalPosition;
+              Navigator.push(
+                Get.context!,
+                BubblePageRoute(
+                  position: tapPosition,
+                  builder: (context) => const VideoScreen(),
+                ),
+              );
+            },
+
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               child: Row(
@@ -60,21 +69,10 @@ class PostersWidget extends StatelessWidget {
             ),
           ),
         if (fromHome)
-          SizedBox(height: 140, child: posterListView())
+          SizedBox(height: 190, child: videoListView())
         else
-          posterGridView(),
+          videoGridView(),
       ],
     );
   }
-}
-
-Widget customTab({required String label}) {
-  return Container(
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: AppColors.primaryColor),
-    ),
-    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-    child: CustomText(text: label, fontSize: 12),
-  );
 }

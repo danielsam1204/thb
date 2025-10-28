@@ -18,17 +18,20 @@ class CategoryWidget extends StatelessWidget {
       children: [
         CustomTitleTile(title: "type".tr),
         const SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          child: Row(
-            children: [
-              categoryOptionCard(icon: AppIcons.music, label: "songs".tr),
-              SizedBox(width: 8),
-              categoryOptionCard(
-                icon: AppIcons.questionMarkFilled,
-                label: "q_and_a".tr,
-              ),
-            ],
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 14),
+            child: Row(
+              children: [
+                categoryOptionCard(icon: AppIcons.music, label: "songs".tr),
+                SizedBox(width: 8),
+                categoryOptionCard(
+                  icon: AppIcons.questionMarkFilled,
+                  label: "q_and_a".tr,
+                ),
+              ],
+            ),
           ),
         ),
         SizedBox(height: 12),
@@ -49,35 +52,38 @@ class CategoryWidget extends StatelessWidget {
         children: [
           Image.asset(AppImages.womenReader),
           SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText(
-                text: "today_reading".tr,
-                color: AppColors.primaryColor,
-                fontWeight: FontWeight.w600,
-              ),
-              SizedBox(height: 4),
-              CustomText(
-                text: "நாள் 4 : ஆதியாகமம் 12–14",
-                color: AppColors.primaryColor,
-                fontSize: 12,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: AppColors.primaryColor),
-                ),
-                child: CustomText(
-                  text: "continue_reading".tr,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomText(
+                  text: "today_reading".tr,
                   color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
-            ],
+                SizedBox(height: 4),
+                CustomText(
+                  text: "நாள் 4 : ஆதியாகமம் 12–14",
+                  color: AppColors.primaryColor,
+                  fontSize: 12,
+                  maxLines: 2,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                  margin: EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: AppColors.primaryColor),
+                  ),
+                  child: CustomText(
+                    text: "continue_reading".tr,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: AppColors.primaryColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

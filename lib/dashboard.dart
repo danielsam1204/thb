@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
         bottomNavigationBar: BottomAppBar(
           color: AppColors.bgLightColor,
           padding: EdgeInsets.zero,
-          height: 70,
+          height: 74,
           child: GetBuilder<DashboardController>(
             builder: (controller) {
               return Row(
@@ -100,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
       behavior: HitTestBehavior.opaque,
       onTap: () => controller.onChangeIndex(index),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
+        padding: const EdgeInsets.symmetric(vertical: 12.0 , horizontal : 2),
         width: MediaQuery.of(Get.context!).size.width / 5,
         decoration: BoxDecoration(
           border: Border(

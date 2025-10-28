@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thb/common/app_color.dart';
-import 'package:thb/screens/homepage.dart';
 import 'package:thb/screens/landing_page.dart';
 
 class SplashScreen extends StatefulWidget {

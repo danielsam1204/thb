@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
+import 'package:thb/widgets/custom_app_bar.dart';
 import 'package:thb/widgets/custom_text.dart';
 
 class DictionaryScreen extends StatelessWidget {
@@ -8,10 +10,8 @@ class DictionaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgLightColor,
-      body: Center(
-        child: CustomText(text: "Dictionary Screen"),
-      ),
+      appBar: CustomAppbar(title: "dictionary".tr),
+      body: Center(child: CustomText(text: "Dictionary Screen")),
     );
   }
 }

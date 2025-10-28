@@ -11,6 +11,8 @@ class AppIcons {
   static const String readBibleOutline = 'assets/icons/read_bible_outline.svg';
   static const String readBibleFilled = 'assets/icons/read_bible_filled.svg';
   static const String favoriteFilled = 'assets/icons/favorite_filled.svg';
+  static const String favoriteOutline = 'assets/icons/favorite_outline.svg';
+  static const String share = 'assets/icons/share.svg';
   static const String notificationFilled = 'assets/icons/notification_filled.svg';
   static const String menu = 'assets/icons/menu.svg';
   static const String search = 'assets/icons/search.svg';

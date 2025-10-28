@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/common/app_icons.dart';
 import 'package:thb/common/app_images.dart';

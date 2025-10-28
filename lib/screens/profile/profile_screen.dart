@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/common/app_icons.dart';
+import 'package:thb/common/app_images.dart';
+import 'package:thb/controllers/dashboard_controller.dart';
+import 'package:thb/controllers/profile_controller.dart';
+import 'package:thb/screens/video/video_screen.dart';
 import 'package:thb/screens/settings/settings_screen.dart';
+import 'package:thb/widgets/bubble_page_route.dart';
 import 'package:thb/widgets/custom_app_bar.dart';
 import 'package:thb/widgets/custom_svg_icon.dart';
 import 'package:thb/widgets/custom_text.dart';
@@ -13,44 +18,61 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(onTap: ()=> Navigator.pop(context)),
+      appBar: CustomAppbar(onTap: () => Navigator.pop(context)),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           child: Column(
             children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 92,
-                      width: 92,
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.primaryColor),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          shape: BoxShape.circle,
+              GetBuilder<ProfileController>(
+                builder: (controller) {
+                  return Center(
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          height: 92,
+                          width: 92,
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.primaryColor),
+                          ),
+                          // child: FadeInImage.assetNetwork(
+                          //   fit: BoxFit.cover,
+                          //   placeholder: AppImages.placeholder,
+                          //   image: controller.profileImage ?? '',
+                          //   imageErrorBuilder: (context, error, stackTrace) {
+                          //     print("erroe --->> $error");
+                          //     return Image.asset(
+                          //       AppImages.placeholder,
+                          //       fit: BoxFit.cover,
+                          //     );
+                          //   },
+                          // ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        padding: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.bgColor,
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: InkWell(
+                            onTap: controller.pickImage,
+                            child: Container(
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors.bgColor,
+                              ),
+                              child: CustomSvgIcon(
+                                icon: AppIcons.camera,
+                                size: 18,
+                              ),
+                            ),
+                          ),
                         ),
-                        child: CustomSvgIcon(icon: AppIcons.camera, size: 18),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
               SizedBox(height: 10),
               CustomText(
@@ -70,7 +92,10 @@ class ProfileScreen extends StatelessWidget {
               titleCard(
                 icon: AppIcons.readBibleFilled,
                 title: 'reading_plan'.tr,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  Get.find<DashboardController>().onChangeIndex(1);
+                },
               ),
               titleCard(
                 icon: AppIcons.quizzesFilled,
@@ -81,7 +106,16 @@ class ProfileScreen extends StatelessWidget {
               titleCard(
                 icon: AppIcons.videoFilled,
                 title: 'videos'.tr,
-                onTap: () {},
+                onTapDown: (details) {
+                  final tapPosition = details.globalPosition;
+                  Navigator.push(
+                    Get.context!,
+                    BubblePageRoute(
+                      position: tapPosition,
+                      builder: (context) => const VideoScreen(),
+                    ),
+                  );
+                },
               ),
               titleCard(
                 icon: AppIcons.editFilled,
@@ -101,22 +135,33 @@ class ProfileScreen extends StatelessWidget {
               titleCard(
                 icon: AppIcons.prayerFilled,
                 title: 'prayer_list'.tr,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  Get.find<DashboardController>().onChangeIndex(3);
+                },
               ),
               titleCard(
                 icon: AppIcons.qAndAFilled,
                 title: 'q_and_a'.tr,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  Get.find<DashboardController>().onChangeIndex(4);
+                },
               ),
               titleCard(
                 icon: AppIcons.settingFilled,
                 title: 'settings'.tr,
-                onTap: () {
+                onTapDown: (details) {
+                  final tapPosition = details.globalPosition;
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                    Get.context!,
+                    BubblePageRoute(
+                      position: tapPosition,
+                      builder: (context) => const SettingsScreen(),
+                    ),
                   );
                 },
+
               ),
               titleCard(
                 icon: AppIcons.logoutFilled,
@@ -133,10 +178,12 @@ class ProfileScreen extends StatelessWidget {
   Widget titleCard({
     required String icon,
     required String title,
-    required void Function() onTap,
+    void Function()? onTap,
+    void Function(TapDownDetails)? onTapDown,
   }) {
     return GestureDetector(
       onTap: onTap,
+      onTapDown: onTapDown,
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         margin: EdgeInsets.symmetric(vertical: 6),

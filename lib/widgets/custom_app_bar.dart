@@ -12,13 +12,15 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.bottomWidget,
     this.actions,
-    this.onTap,
+    this.onTap, this.leading, this.leadingWidth,
   });
 
   final String? title;
   final PreferredSizeWidget? bottomWidget;
   final List<Widget>? actions;
   final VoidCallback? onTap;
+  final Widget? leading;
+  final double? leadingWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         fontWeight: FontWeight.w600,
       ),
       actions: actions,
-      leading: GestureDetector(
+      leadingWidth: leadingWidth,
+      leading: leading ?? GestureDetector(
         onTap: onTap ?? () => controller.onChangeIndex(0),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8.0),

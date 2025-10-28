@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +16,9 @@ void main() async {
   final prefs = Get.find<SharedPreferences>();
   final settingsController = Get.find<SettingsController>();
   await settingsController.onChangeTheme(prefs.getBool("theme_mode") ?? false);
+  await settingsController.onChangeFont(
+    prefs.getString("font_size") ?? "Medium",
+  );
   runApp(const MyApp());
 }
 
@@ -37,3 +42,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// https://maps.googleapis.com/maps/api/place/autocomplete/json?input=porur&key=AIzaSyCi2q9rEJ0LUgbgw7aD49U_o-q_UX8LDC0
