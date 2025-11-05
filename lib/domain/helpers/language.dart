@@ -59,6 +59,17 @@ class Language extends Translations {
       "letter_setting": "Letter Setting",
       "give_your_needs_to_the_lord": "Give your needs to the Lord.",
       "get_started": "Get started",
+      "enter_a_title": "Enter a title",
+      "submit": "Submit",
+      "thank_you": "Thank you",
+      "add_details_about_your_prayer": "Add details about your prayer",
+      "thank_you_for_sending_a_prayer_request_we_are_praying_for_the_prayers_you_mentioned":
+          "Thank you for sending a prayer request, we are praying for the prayers you mentioned.",
+      "read_more": "Read more",
+      "search": "Search",
+      "current_location": "Current Location",
+      "upon_the_rock_i_will_build_my_church": "Upon the rock I will build my church.",
+      "find_out_now": "Find out now",
       "daily_prayers_and_spiritual_guidance":
           "Daily prayers and spiritual guidance.",
     },
@@ -118,6 +129,18 @@ class Language extends Translations {
       "extra_large": "கூடுதல் பெரியது",
       "give_your_needs_to_the_lord": "உங்கள் தேவைகளை ஆண்டவரிடம் கொடுக்கவும்",
       "get_started": "தொடங்குங்கள்",
+      "enter_a_title": "தலைப்பை உள்ளிடவும்",
+      "submit": "சமர்ப்பிக்கவும்",
+      "read_more": "மேலும் படிக்க",
+      "thank_you": "நன்றி",
+      "search": "தேடு",
+      "current_location": "தற்போதைய இடம்",
+      "find_out_now": "இப்போது கண்டுபிடி",
+      "upon_the_rock_i_will_build_my_church": "பாறையின் மீது நான் என் திருச்சபையை கட்டுவேன்",
+      "thank_you_for_sending_a_prayer_request_we_are_praying_for_the_prayers_you_mentioned":
+          "பிரார்த்தனை கோரிக்கையை அனுப்பியதற்கு நன்றி, நீங்கள் குறிப்பிட்ட பிராத்தைகளுக்காக நாங்கள் ஜெபிக்கிறோம்.",
+      "add_details_about_your_prayer":
+          "உங்கள் பிராத்தனை பற்றிய விவரங்களை சேர்க்கவும்",
       "daily_prayers_and_spiritual_guidance":
           "தினசரி பிரார்த்தனைகள் மற்றும் ஆன்மீக வழிகாட்டல்கள்.",
     },

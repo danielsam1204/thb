@@ -77,15 +77,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ],
               ),
             ),
-            CustomTitleTile(title: "theme".tr),
-            Obx(
-              () => settingsCard(
-                label: "dark_mode".tr,
-                value: controller.isDarkMode.value,
-                onChanged: controller.onChangeTheme,
-              ),
-            ),
-            SizedBox(height: 10),
+            // CustomTitleTile(title: "theme".tr),
+            // Obx(
+            //   () => settingsCard(
+            //     label: "dark_mode".tr,
+            //     value: controller.isDarkMode.value,
+            //     onChanged: controller.onChangeTheme,
+            //   ),
+            // ),
+            // SizedBox(height: 10),
             CustomTitleTile(title: "letter_setting".tr),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),

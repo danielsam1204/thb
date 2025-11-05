@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/common/app_icons.dart';
 import 'package:thb/screens/home/poster_screen.dart';
+import 'package:thb/widgets/bubble_page_route.dart';
 import 'package:thb/widgets/custom_svg_icon.dart';
 import 'package:thb/widgets/custom_tab_bar.dart';
 import 'package:thb/widgets/custom_text.dart';
@@ -38,10 +39,16 @@ class PostersWidget extends StatelessWidget {
         ),
         if (fromHome)
           GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PosterScreen()),
-            ),
+            onTapDown: (TapDownDetails details) {
+              final tapPosition = details.globalPosition;
+              Navigator.push(
+                Get.context!,
+                BubblePageRoute(
+                  position: tapPosition,
+                  builder: (context) => const PosterScreen(),
+                ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               child: Row(

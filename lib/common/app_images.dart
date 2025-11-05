@@ -5,4 +5,7 @@ class AppImages{
   static const String placeholder = 'assets/image/home/placeholder.png';
   static const String church = 'assets/image/church.jpg';
   static const String churchPlaceholder = 'assets/image/church_placeholder.jpg';
+  static const String verseCard = 'assets/image/verse_card.png';
+  static const String thanksImg = 'assets/image/thanks_img.png';
+  static const String bgImg = 'assets/image/bg_img.jpeg';
 }

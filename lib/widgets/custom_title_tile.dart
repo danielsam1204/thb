@@ -6,13 +6,14 @@ import 'package:thb/widgets/custom_vertical_divider.dart';
 class CustomTitleTile extends StatelessWidget {
   final String title;
   final Widget? action;
+  final EdgeInsetsGeometry? padding;
 
-  const CustomTitleTile({super.key, required this.title, this.action});
+  const CustomTitleTile({super.key, required this.title, this.action,  this.padding});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 14),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: 14),
       child: Row(
         children: [
           customVerticalDivider(),

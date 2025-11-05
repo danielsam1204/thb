@@ -5,6 +5,7 @@ import 'package:thb/common/app_icons.dart';
 import 'package:thb/common/app_images.dart';
 import 'package:thb/controllers/dashboard_controller.dart';
 import 'package:thb/controllers/profile_controller.dart';
+import 'package:thb/screens/song/song_screen.dart';
 import 'package:thb/screens/video/video_screen.dart';
 import 'package:thb/screens/settings/settings_screen.dart';
 import 'package:thb/widgets/bubble_page_route.dart';
@@ -102,7 +103,20 @@ class ProfileScreen extends StatelessWidget {
                 title: 'quizzes'.tr,
                 onTap: () {},
               ),
-              titleCard(icon: AppIcons.music, title: 'songs'.tr, onTap: () {}),
+              titleCard(
+                icon: AppIcons.music,
+                title: 'songs'.tr,
+                onTapDown: (details) {
+                  final tapPosition = details.globalPosition;
+                  Navigator.push(
+                    context,
+                    BubblePageRoute(
+                      builder: (context) => SongScreen(),
+                      position: tapPosition,
+                    ),
+                  );
+                },
+              ),
               titleCard(
                 icon: AppIcons.videoFilled,
                 title: 'videos'.tr,
@@ -130,16 +144,19 @@ class ProfileScreen extends StatelessWidget {
               titleCard(
                 icon: AppIcons.prayerFilled,
                 title: 'prayers'.tr,
-                onTap: () {},
-              ),
-              titleCard(
-                icon: AppIcons.prayerFilled,
-                title: 'prayer_list'.tr,
                 onTap: () {
                   Navigator.pop(context);
                   Get.find<DashboardController>().onChangeIndex(3);
                 },
               ),
+              // titleCard(
+              //   icon: AppIcons.prayerFilled,
+              //   title: 'prayer_list'.tr,
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //     Get.find<DashboardController>().onChangeIndex(3);
+              //   },
+              // ),
               titleCard(
                 icon: AppIcons.qAndAFilled,
                 title: 'q_and_a'.tr,
@@ -161,7 +178,6 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   );
                 },
-
               ),
               titleCard(
                 icon: AppIcons.logoutFilled,

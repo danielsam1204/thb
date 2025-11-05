@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thb/common/app_color.dart';
+import 'package:thb/dashboard.dart';
 import 'package:thb/screens/user/sigin.dart';
 
 class LandingPage extends StatefulWidget {
@@ -172,11 +173,18 @@ class _LandingPageState extends State<LandingPage> {
                       GestureDetector(
                         onTap: () async {
                           if (_currentPage == pages.length - 1) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const Dashboard(),
+                              ),
+                            );
                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>BiblePage()));
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setBool("landing", true);
+                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+                            // SharedPreferences prefs =
+                            //     await SharedPreferences.getInstance();
+                            // prefs.setBool("landing", true);
                           } else {
                             _controller.nextPage(
                               duration: const Duration(milliseconds: 400),

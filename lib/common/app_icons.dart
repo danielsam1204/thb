@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 class AppIcons {
   static const String homeFilled = 'assets/icons/home_filled.svg';
   static const String homeOutline = 'assets/icons/home_outline.svg';
@@ -29,4 +31,14 @@ class AppIcons {
   static const String editFilled = 'assets/icons/edit_filled.svg';
   static const String squareEditFilled = 'assets/icons/square_edit_filled.svg';
   static const String quizzesFilled = 'assets/icons/quizzes_filled.svg';
+  static const String clear = 'assets/icons/clear.svg';
+  static const String addFilled = 'assets/icons/add_filled.svg';
+  static const String arrowBack = 'assets/icons/arrow_back.svg';
+  static const String churchMarker = 'assets/icons/church_marker.png';
+  static const String starOutline = 'assets/icons/star_outline.svg';
+  static const String starFilled = 'assets/icons/star_filled.svg';
+  static const String starHalfFilled = 'assets/icons/star_half_filled.svg';
+  static const IconData myLocation = Icons.my_location;
+  static const IconData locationOnOutlined = Icons.location_on_outlined;
+  static const IconData northWest = Icons.north_west;
 }

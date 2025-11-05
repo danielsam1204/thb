@@ -9,7 +9,10 @@ class CustomButton extends StatelessWidget {
   final Color? backgroundColor;
   final void Function()? onTap;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
   final Color? borderColor;
+  final double? width;
+  final FontWeight? labelWeight;
 
   const CustomButton({
     super.key,
@@ -20,6 +23,9 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor,
     this.padding,
     this.borderColor,
+    this.width,
+    this.labelWeight,
+    this.margin,
   });
 
   @override
@@ -27,8 +33,11 @@ class CustomButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.center,
+        width: width,
         padding:
             padding ?? const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+        margin: margin,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryColor,
           border: Border.all(
@@ -39,6 +48,7 @@ class CustomButton extends StatelessWidget {
         child: CustomText(
           text: label,
           fontSize: labelSize ?? 10,
+          fontWeight: labelWeight,
           color: labelColor ?? AppColors.fontOffWhiteColor,
         ),
       ),

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:thb/common/app_color.dart';
 import 'package:thb/common/app_icons.dart';
 import 'package:thb/common/app_images.dart';
+import 'package:thb/screens/song/song_screen.dart';
+import 'package:thb/widgets/bubble_page_route.dart';
 import 'package:thb/widgets/custom_svg_icon.dart';
 import 'package:thb/widgets/custom_text.dart';
 import 'package:thb/widgets/custom_title_tile.dart';
@@ -10,6 +12,21 @@ import 'package:thb/widgets/custom_vertical_divider.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({super.key});
+
+  void onTapSongCard(TapDownDetails details) {
+    final tapPosition = details.globalPosition;
+    Navigator.push(
+      Get.context!,
+      BubblePageRoute(
+        builder: (context) => SongScreen(),
+        position: tapPosition,
+      ),
+    );
+  }
+
+  void onTapQAndACard(TapDownDetails details) {
+    final tapPosition = details.globalPosition;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +41,16 @@ class CategoryWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 14),
             child: Row(
               children: [
-                categoryOptionCard(icon: AppIcons.music, label: "songs".tr),
+                categoryOptionCard(
+                  icon: AppIcons.music,
+                  label: "songs".tr,
+                  onTapDown: onTapSongCard,
+                ),
                 SizedBox(width: 8),
                 categoryOptionCard(
                   icon: AppIcons.questionMarkFilled,
                   label: "q_and_a".tr,
+                  onTapDown: onTapQAndACard,
                 ),
               ],
             ),
@@ -90,23 +112,30 @@ class CategoryWidget extends StatelessWidget {
     );
   }
 
-  Widget categoryOptionCard({required String icon, required String label}) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.bgColor,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        children: [
-          CustomSvgIcon(icon: icon),
-          SizedBox(width: 8),
-          CustomText(
-            text: label,
-            fontWeight: FontWeight.w600,
-            color: AppColors.primaryColor,
-          ),
-        ],
+  Widget categoryOptionCard({
+    required String icon,
+    required String label,
+    required void Function(TapDownDetails) onTapDown,
+  }) {
+    return GestureDetector(
+      onTapDown: onTapDown,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColors.bgColor,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Row(
+          children: [
+            CustomSvgIcon(icon: icon),
+            SizedBox(width: 8),
+            CustomText(
+              text: label,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primaryColor,
+            ),
+          ],
+        ),
       ),
     );
   }
