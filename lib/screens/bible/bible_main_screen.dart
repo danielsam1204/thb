@@ -49,7 +49,7 @@ class _BiblePageState extends State<BiblePage> {
     List<BibleTamil> filteredBooks;
     if (_selectedTab == "மழைய ஏற்றது") {
       filteredBooks = booksList.sublist(0, booksList.length >= 32 ? 32 : booksList.length);
-    } else if (_selectedTab == "புதிய ஏற்றது") {
+    } else if (_selectedTab == "புதிய ஏற்பாடு ") {
       filteredBooks = booksList.length > 32 ? booksList.sublist(32) : [];
     } else {
       filteredBooks = booksList;
@@ -102,21 +102,31 @@ class _BiblePageState extends State<BiblePage> {
                       );
                     });
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFF9C4D00) : Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: const Color(0xFF9C4D00)),
-                    ),
-                    child: Text(
-                      tab,
-                      style: TextStyle(
-                        color: isSelected ? Colors.white : const Color(0xFF9C4D00),
-                        fontWeight: FontWeight.bold,
+                  child:Flexible(
+                      child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 150),
+                          child:Flexible(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: isSelected ? const Color(0xFF9C4D00) : Colors.white,
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(color: const Color(0xFF9C4D00)),
+                      ),
+                      child: Text(
+                        tab,
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                        overflow: TextOverflow.visible,
+                        style: TextStyle(
+                          color: isSelected ? Colors.white : const Color(0xFF9C4D00),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
+                  )))
+
+
                 );
               }).toList(),
             ),
