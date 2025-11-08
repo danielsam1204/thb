@@ -38,7 +38,11 @@ class AppIcons {
   static const String starOutline = 'assets/icons/star_outline.svg';
   static const String starFilled = 'assets/icons/star_filled.svg';
   static const String starHalfFilled = 'assets/icons/star_half_filled.svg';
+  static const String appleIcon = 'assets/icons/apple_icon.svg';
+  static const String googleIcon = 'assets/icons/google_icon.svg';
   static const IconData myLocation = Icons.my_location;
   static const IconData locationOnOutlined = Icons.location_on_outlined;
   static const IconData northWest = Icons.north_west;
+  static const IconData visibility = Icons.visibility;
+  static const IconData visibilityOff = Icons.visibility_off;
 }

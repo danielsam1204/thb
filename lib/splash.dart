@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thb/common/app_color.dart';
+import 'package:thb/screens/auth/login_screen.dart';
 import 'package:thb/screens/landing_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -59,13 +61,13 @@ class _SplashScreenState extends State<SplashScreen>
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? landingEnabled = prefs.getBool("landing");
 
-    Timer(const Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              // landingEnabled == true ? const HomePage() :
-              const LandingPage(),
+          builder: (context) => landingEnabled == true
+              ? const LoginScreen()
+              : const LandingPage(),
         ),
       );
     });
@@ -80,8 +82,15 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
-      backgroundColor: AppColors.darkBrown,
+      backgroundColor: AppColors.primaryDarkColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

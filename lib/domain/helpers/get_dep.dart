@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:thb/controllers/auth_controller.dart';
 import 'package:thb/controllers/dashboard_controller.dart';
 import 'package:thb/controllers/dictionary_controller.dart';
 import 'package:thb/controllers/home_controller.dart';
@@ -13,6 +14,7 @@ Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.put(sharedPreferences, permanent: true);
   // Controller
+  Get.lazyPut(() => AuthController(sharedPreferences: Get.find()));
   Get.lazyPut(() => DashboardController(sharedPreferences: Get.find()));
   Get.lazyPut(() => HomeController());
   Get.lazyPut(() => SettingsController(sharedPreferences: Get.find()));

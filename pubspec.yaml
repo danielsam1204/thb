@@ -44,6 +44,7 @@ dependencies:
   dio: ^5.9.0
   flutter_tts: ^4.2.3
   logger: ^2.6.2
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

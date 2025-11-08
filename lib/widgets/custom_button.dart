@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final void Function()? onTap;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? margin;
+  final BorderRadiusGeometry? borderRadius;
   final Color? borderColor;
   final double? width;
   final FontWeight? labelWeight;
@@ -26,6 +27,7 @@ class CustomButton extends StatelessWidget {
     this.width,
     this.labelWeight,
     this.margin,
+    this.borderRadius,
   });
 
   @override
@@ -43,7 +45,7 @@ class CustomButton extends StatelessWidget {
           border: Border.all(
             color: borderColor ?? (backgroundColor ?? AppColors.primaryColor),
           ),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: borderRadius ?? BorderRadius.circular(20),
         ),
         child: CustomText(
           text: label,

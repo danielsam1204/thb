@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thb/controllers/settings_controller.dart';
-import 'package:thb/dashboard.dart';
 import 'package:thb/domain/helpers/get_dep.dart' as dep;
 import 'package:thb/domain/helpers/language.dart';
 import 'package:thb/splash.dart';
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
       locale: Locale(language),
       translations: Language(),
       fallbackLocale: Locale("ta_IN"),
-      // home: Dashboard(),
       home: SplashScreen()
     );
   }

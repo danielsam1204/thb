@@ -13,6 +13,7 @@ import 'package:thb/domain/helpers/helper_func.dart';
 import 'package:thb/domain/models/google_map_response.dart';
 import 'package:thb/domain/models/google_map_search_response.dart';
 import 'package:thb/widgets/custom_snackbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapController extends GetxController implements GetxService {
   final SharedPreferences sharedPreferences;
@@ -110,8 +111,9 @@ class MapController extends GetxController implements GetxService {
                 markerId: MarkerId(name),
                 position: LatLng(lat, lng),
                 infoWindow: InfoWindow(title: name),
-                icon:await BitmapDescriptor.asset(
-                  const ImageConfiguration(size: Size(48, 48)), // optional size hint
+                icon: await BitmapDescriptor.asset(
+                  const ImageConfiguration(size: Size(48, 48)),
+                  // optional size hint
                   AppIcons.churchMarker,
                 ),
               ),
@@ -242,5 +244,26 @@ class MapController extends GetxController implements GetxService {
   void onTapEnableSearch(bool val) {
     enableSearch = val;
     update();
+  }
+
+  Future<void> openGoogleMapDirections({
+    required double destLat,
+    required double destLng,
+  }) async {
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+    final sourceLat = position.latitude;
+    final sourceLng = position.longitude;
+    final Uri googleMapUrl = Uri.parse(
+      'https://www.google.com/maps/dir/?api=1&origin=$sourceLat,$sourceLng&destination=$destLat,$destLng&travelmode=driving',
+    );
+    try {
+      if (await canLaunchUrl(googleMapUrl)) {
+        await launchUrl(googleMapUrl, mode: LaunchMode.externalApplication);
+      } else {
+        showCustomSnackBar('Could not open Google Maps');
+      }
+    } catch (_) {}
   }
 }
